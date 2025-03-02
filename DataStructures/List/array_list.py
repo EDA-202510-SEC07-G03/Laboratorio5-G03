@@ -114,3 +114,77 @@ def sub_list(my_list, pos_i, num_elements):
         return sub_list
     else:
         return "IndexError: list index out of range"
+    
+def default_sort_criteria(element_1, element_2):
+
+   is_sorted = False
+   if element_1 < element_2:
+      is_sorted = True
+   return is_sorted
+
+def selection_sort(my_list, sort_criteria):
+    size = my_list["size"]
+    if sort_criteria == True:
+        for i in range(size):
+            min_pos = i
+            for j in range(i + 1, size):
+                if my_list["elements"][j] < my_list["elements"][min_pos]:
+                    min_pos = j
+            if min_pos != i:
+                exchange(my_list, i, min_pos)
+    else:
+        for i in range(size):
+            min_pos = i
+            for j in range(i + 1, size):
+                if my_list["elements"][j] > my_list["elements"][min_pos]:
+                    min_pos = j
+            if min_pos != i:
+                exchange(my_list, i, min_pos)
+    return my_list
+def insertion_sort(my_list, sort_criteria):
+    size = my_list["size"]
+    if sort_criteria == True:
+        for i in range(1, size):
+            llave = my_list["elements"][i]
+            j = i - 1
+            while j >= 0 and my_list["elements"][j] > llave:
+                my_list["elements"][j + 1] = my_list["elements"][j]
+                j -= 1
+            my_list["elements"][j+1] = llave
+    else:
+        for i in range(1, size):
+            llave = my_list["elements"][i]
+            j = i - 1
+            while j >= 0 and my_list["elements"][j] < llave:
+                my_list["elements"][j + 1] = my_list["elements"][j]
+                j -= 1
+            my_list["elements"][j+1] = llave
+    return my_list
+
+def shell_sort(my_list, sort_criteria):
+    size = my_list["size"]
+    h = 1
+    while h < size//3:
+        h = 3*h+1
+    if sort_criteria == True:
+        while h > 0:
+            for i in range(h , size):
+                llave = my_list["elements"][i]
+                j = i
+                while j >= h and my_list["elements"][j - h] > llave:
+                    my_list["elements"][j] = my_list["elements"][j - h]
+                    j -= h
+                my_list["elements"][j] = llave
+    else:
+        while h > 0:
+            for i in range(h , size):
+                llave = my_list["elements"][i]
+                j = i
+                while j >= h and my_list["elements"][j - h] < llave:
+                    my_list["elements"][j] = my_list["elements"][j - h]
+                    j -= h
+                my_list["elements"][j] = llave
+    return my_list
+        
+    
+    
