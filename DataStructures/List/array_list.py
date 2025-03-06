@@ -187,6 +187,8 @@ def shell_sort(my_list, sort_criteria):
                         my_list["elements"][j] = my_list["elements"][j - h]
                         j -= h
                     my_list["elements"][j] = llave
+                    
+                h=h//3
     return my_list
         
     
