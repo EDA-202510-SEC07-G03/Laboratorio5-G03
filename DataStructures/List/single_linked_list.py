@@ -194,16 +194,62 @@ def selection_sort (my_list,sort_crit):
     elif my_list["size"]==1:
         return my_list
     
-    while current:
-        minimo=current
-        sig=current["next"]
-        while sig:
-            if sig["info"] < minimo["info"]:
-                minimo["info"]=sig["info"]
-            sig=sig["next"]
-        if minimo != current:
-            current["info"],minimo["info"] = minimo["info"], current["info"]
-        
-        current=current["next"]
+    if sort_crit== True:
+        while current is not None:
+            minimo=current
+            sig=current["next"]
+            while sig is not None:
+                if sig["info"] < minimo["info"]:
+                    minimo=sig
+                sig=sig["next"]
+            if minimo != current:
+                current["info"],minimo["info"] = minimo["info"], current["info"]
+            
+            current=current["next"]
+    else:
+        while current is not None:
+            minimo=current
+            sig=current["next"]
+            while sig is not None:
+                if sig["info"] > minimo["info"]:
+                    minimo=sig
+                sig=sig["next"]
+            if minimo != current:
+                current["info"],minimo["info"] = minimo["info"], current["info"]
+            
+            current=current["next"]
     return my_list
 
+def insertion_sort(my_list,sort_crit):
+    long=my_list["size"]
+    
+    current=my_list["first"]
+    
+    if my_list["size"]==0:
+        return my_list
+    elif my_list["size"]==1:
+        return my_list
+    
+    if sort_crit==True:
+        while current is not None:
+            llave=current["info"]
+            sig=current["next"]
+            while sig is not None:
+                if sig["info"] < llave:
+                    current["info"]=sig["info"]
+            prev=current
+            current=current["next"]
+            sig=sig["next"]
+            
+    if sort_crit==False:
+        while current is not None:
+            llave=current["info"]
+            sig=current["next"]
+            while sig is not None:
+                if sig["info"] < llave:
+                    current["info"]=sig["info"]
+            prev=current
+            current=current["next"]
+            sig=sig["next"]
+    
+    return my_list
