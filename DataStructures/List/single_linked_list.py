@@ -176,7 +176,7 @@ def sub_list(my_list,pos,num_elements):
             actual=actual["next"]
         actual["next"]=None
     return my_list
-            
+
 def default_sort_criteria(element_1, element_2):
 
    is_sorted = False
@@ -184,15 +184,26 @@ def default_sort_criteria(element_1, element_2):
       is_sorted = True
    return is_sorted
 
-def selection_sort(my_list, sort_crit):
-    if my_list["size"] == 0 or my_list["size"] == 1:
+def selection_sort (my_list,sort_crit):
+    long=my_list["size"]
+    
+    current=my_list["first"]
+    
+    if my_list["size"]==0:
         return my_list
-    reference = my_list["first"]
-    min_num = my_list["first"]["info"]
-    for i in range(my_list["size"]):
-        if reference["next"]["info"] < min_num:
-            min_num = reference["next"]["info"]
-            reference["next"]["next"] = my_list["first"]
-            my_list["first"] = reference["next"]
-        reference = reference["next"]
+    elif my_list["size"]==1:
+        return my_list
+    
+    while current:
+        minimo=current
+        sig=current["next"]
+        while sig:
+            if sig["info"] < minimo["info"]:
+                minimo["info"]=sig["info"]
+            sig=sig["next"]
+        if minimo != current:
+            current["info"],minimo["info"] = minimo["info"], current["info"]
+        
+        current=current["next"]
     return my_list
+
