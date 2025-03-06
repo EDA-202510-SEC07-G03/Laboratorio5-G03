@@ -184,3 +184,26 @@ def default_sort_criteria(element_1, element_2):
       is_sorted = True
    return is_sorted
 
+def selection_sort (my_list,sort_crit):
+    long=my_list["size"]
+    
+    current=my_list["first"]
+    
+    if my_list["size"]==0:
+        return my_list
+    elif my_list["size"]==1:
+        return my_list
+    
+    while current:
+        minimo=current
+        sig=current["next"]
+        while sig:
+            if sig["info"] < minimo["info"]:
+                minimo["info"]=sig["info"]
+            sig=sig["next"]
+        if minimo != current:
+            current["info"],minimo["info"] = minimo["info"], current["info"]
+        
+        current=current["next"]
+    return my_list
+
