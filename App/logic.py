@@ -62,8 +62,8 @@ def new_logic(user_data_structure):
 
     # Usamos la estructura seleccionada para inicializar todas las listas
     catalog["books"] = data_structure.new_list()
-    catalog["authors"] = None #TODO: completar la creacion de la lista de autores
-    catalog["tags"] = None #TODO: completar la creacion de la lista de tags
+    catalog["authors"] = data_structure.new_list() #TODO: completar la creacion de la lista de autores
+    catalog["tags"] = data_structure.new_list() #TODO: completar la creacion de la lista de tags
     catalog["book_tags"] = data_structure.new_list()
     
     return catalog
@@ -111,7 +111,7 @@ def load_books_tags(catalog):
     """
     Carga la información que asocia tags con libros.
     """
-    bookstagsfile = None #TODO: completar la ruta del archivo de BOOKS_TAGS 
+    bookstagsfile = data_dir + '/book_tags.csv' #TODO: completar la ruta del archivo de BOOKS_TAGS 
     input_file = csv.DictReader(open(bookstagsfile, encoding='utf-8'))
     for booktag in input_file:
         add_book_tag(catalog, booktag)
@@ -184,9 +184,17 @@ def select_sort_algorithm(algo_opt):
 
     #opcion 4: Insertion Sort
     #TODO: completar la opcion de Insertion Sort
+    if algo_opt == 2:
+        sort_algorithm = 2
+        algo_msg = "Seleccionó la configuración - Insertion Sort"
+    
 
     #opcion 5: Shell Sort
     #TODO: completar la opcion de Shell Sort
+    if algo_opt == 3:
+        sort_algorithm = 3
+        algo_msg = "Seleccionó la configuración - Shell Sort"
+    
 
     else:
         algo_msg = "No seleccionó una configuración válida"
@@ -260,16 +268,17 @@ def count_books_by_tag(catalog, tag_name):
 
 def book_size(catalog):
     #TODO: completar la funcion para obtener el tamaño de la lista de libros
-    pass
+    return data_structure.size(catalog["books"])
+
 
 
 def author_size(catalog):
     #TODO: completar la funcion para obtener el tamaño de la lista de autores
-    pass
+    return data_structure.size(catalog["authors"])
 
 def tag_size(catalog):
     #TODO: completar la funcion para obtener el tamaño de la lista de tags
-    pass
+    return data_structure.size(catalog["tags"])
 
 
 def book_tag_size(catalog):
@@ -320,16 +329,16 @@ def sort_books(catalog):
     #TODO: completar las opciones para selection_sort, insertion_sort y shell_sort
     
     if sort_algorithm == 1:
-        sorted_books_s = None  #TODO: completar la llamada a selection_sort
-        pass
+        sorted_books_s = data_structure.selection_sort(sorted_books)  #TODO: completar la llamada a selection_sort
+        
        
     elif sort_algorithm == 2:
         #TODO: completar la llamada a insertion_sort
-        pass
+        sorted_books_s = data_structure.insertion_sort(sorted_books)
     
     elif sort_algorithm == 3:
         #TODO: completar la llamada a shell_sort
-        pass
+        sorted_books_s = data_structure.shell_sort(sorted_books)
     
     end_time = get_time()
     delta = delta_time(start_time, end_time)

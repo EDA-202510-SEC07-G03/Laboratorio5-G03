@@ -163,27 +163,30 @@ def insertion_sort(my_list, sort_criteria):
 
 def shell_sort(my_list, sort_criteria):
     size = my_list["size"]
-    h = 1
-    while h < size//3:
-        h = 3*h+1
-    if sort_criteria == True:
-        while h > 0:
-            for i in range(h , size):
-                llave = my_list["elements"][i]
-                j = i
-                while j >= h and my_list["elements"][j - h] > llave:
-                    my_list["elements"][j] = my_list["elements"][j - h]
-                    j -= h
-                my_list["elements"][j] = llave
+    if size == 0 or size == 1:
+        return my_list
     else:
-        while h > 0:
-            for i in range(h , size):
-                llave = my_list["elements"][i]
-                j = i
-                while j >= h and my_list["elements"][j - h] < llave:
-                    my_list["elements"][j] = my_list["elements"][j - h]
-                    j -= h
-                my_list["elements"][j] = llave
+        h = 1
+        while h < size//2:
+            h = 3* h + 1
+        if sort_criteria == True:
+            while h > 0:
+                for i in range(h , size):
+                    llave = my_list["elements"][i]
+                    j = i
+                    while j >= h and my_list["elements"][j - h] > llave:
+                        my_list["elements"][j] = my_list["elements"][j - h]
+                        j -= h
+                    my_list["elements"][j] = llave
+        else:
+            while h > 0:
+                for i in range(h , size):
+                    llave = my_list["elements"][i]
+                    j = i
+                    while j >= h and my_list["elements"][j - h] < llave:
+                        my_list["elements"][j] = my_list["elements"][j - h]
+                        j -= h
+                    my_list["elements"][j] = llave
     return my_list
         
     
