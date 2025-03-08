@@ -194,10 +194,10 @@ def main():
             print("Cargando información de los archivos ....")
             bk, at, tg, bktg = load_data(control)
             #TODO: imprimir la cantidad de libros, autores, géneros y asociaciones de géneros a libros cargados
-            print("Libros cargados: "+data_structure.size(bk))
-            print("Autores cargados: "+data_structure.size(at))
-            print("Tags cargados: "+data_structure.size(tg))
-            print("Booktags cargados: "+data_structure.size(bktg))
+            print("Libros cargados: ",bk)
+            print("Autores cargados: ",at)
+            print("Tags cargados: ",tg)
+            print("Booktags cargados: ",bktg)
 
         elif int(inputs[0]) == 2:
             number = input("Ingrese el id del libro que desea buscar: ")
