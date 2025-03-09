@@ -141,6 +141,7 @@ def selection_sort(my_list, sort_criteria):
             if min_pos != i:
                 exchange(my_list, i, min_pos)
     return my_list
+
 def insertion_sort(my_list, sort_criteria):
     size = my_list["size"]
     if sort_criteria == True:
@@ -190,6 +191,67 @@ def shell_sort(my_list, sort_criteria):
                     
                 h=h//3
     return my_list
-        
+   
+def quick_sort(my_list, sort_criteria, low=0, high=None):
+    if high is None:
+        high = size(my_list)
+    if sort_criteria == True:
+        def partition(my_list, low, high):
+            pivot = my_list[high]
+            k = low
+            for i in range(low, high):
+                if my_list[i] < pivot:
+                    exchange(my_list, my_list[k], my_list[i])
+                    k += 1
+            exchange(my_list, my_list[k], my_list[high])
+            return k
+    else:
+        def partition(my_list, low, high):
+            pivot = my_list[high]
+            k = low
+            for i in range(low, high):
+                if my_list[i] > pivot:
+                    exchange(my_list, my_list[k], my_list[i])
+                    k += 1
+            exchange(my_list, my_list[k], my_list[high])
+            return k     
+    
+    if low < high:
+        pindex = partition(my_list, low, high)
+        quick_sort(my_list, low, pindex - 1)
+        quick_sort(my_list, pindex + 1, high) 
+    return my_list
+
+def merge(left, right, sort_criteria):
+    sorted_list = new_list()
+    i = j = 0
+    if sort_criteria == True:
+        while i < size(left) and j < size(right):
+            if left[i] <= right[j]:
+                add_last(sorted_list, left[i])
+                i += 1
+            else:
+                add_last(sorted_list, right[j])
+                j += 1
+        return sorted_list
+    else:
+        while i < size(left) and j < size(right):
+            if left[i] >= right[j]:
+                add_last(sorted_list, left[i])
+                i += 1
+            else:
+                add_last(sorted_list, right[j])
+                j += 1
+        return sorted_list       
+
+def merge_sort(my_list, sort_criteria):
+    if size(my_list) <= 1:
+        return my_list
+    mid = size(my_list) // 2
+    l_half = merge_sort(sub_list(my_list, 0, mid))
+    r_half = merge_sort(sub_list(my_list, mid, mid))
+    return merge(l_half, r_half, sort_criteria)
+    
+         
     
     
