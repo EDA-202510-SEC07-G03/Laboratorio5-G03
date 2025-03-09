@@ -46,14 +46,18 @@ def add_last(my_list,element):
     Añade un elemento al final de la estructura de datos
     """
     new_node=ln.new_single_node(element)
-    my_list["last"]=new_node
     
-    if my_list["size"]==0:
-        my_list["first"]=new_node
+    if my_list["size"] == 0:
+        my_list["first"] = new_node
+        my_list["last"] = new_node
+    else:
+        my_list["last"]["next"] = new_node
+        my_list["last"] = new_node
     
     my_list["size"]+=1
     
     return my_list
+
 def size(my_list):
     return my_list["size"]
 
@@ -205,5 +209,41 @@ def selection_sort (my_list,sort_crit):
             current["info"],minimo["info"] = minimo["info"], current["info"]
         
         current=current["next"]
+    return my_list
+
+def shell_sort(my_list, sort_crit):
+    if my_list["size"] == 0 or my_list["size"] == 1:
+        return my_list
+    n = my_list["size"]
+    h = 1
+    reference3 = my_list["first"]
+    reference4 = my_list["first"]
+    
+    while h < n // 3:
+        h = 3 * h + 1
+    
+    while h > 0:
+        for i in range(h, n):
+            reference = my_list["first"]
+            for k in range(i):
+                reference = reference["next"]
+            key = reference["info"]
+            
+            j = i
+            reference2 = my_list["first"]
+            for i in range(j-h):
+                reference2 = reference2["next"]
+                
+            while j >= h and reference2["info"] > key:
+                reference3 = my_list["first"]
+                for i in range(j):
+                    reference3 = reference3["next"]
+                reference3 = reference2
+                j -= h
+                reference4 = my_list["first"]
+                for i in range(j):
+                    reference4 = reference4["next"]
+            reference4["info"] = key
+        h //= 3
     return my_list
 
