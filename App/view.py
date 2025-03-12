@@ -26,6 +26,8 @@
  """
 
 import sys
+default_limit = 1000
+sys.setrecursionlimit(default_limit*1000)
 import App.logic as logic
 from DataStructures.List import array_list as al
 from DataStructures.List import single_linked_list as lt
@@ -231,7 +233,7 @@ def main():
             print("Ordenando los libros por rating ...")
             result = logic.sort_books(control)
             #TODO:imprimir el resultado del ordenamiento
-            print(result) 
+            print(result[0]) 
             print("Tiempo de ejecución:", f"{result[1]:.3f}", "[ms]")
 
         elif int(inputs[0]) == 8:

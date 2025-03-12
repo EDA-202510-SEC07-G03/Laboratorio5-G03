@@ -4,12 +4,19 @@ def new_list():
     newlist={"size":0,"first":None,"last":None,}
     return(newlist)
 
-def get_element (my_list,pos):
-    searchpos=0
-    node=my_list["first"]
+def get_element(my_list, pos):
+    if pos < 0 or pos >= my_list["size"]:  
+        raise IndexError("Index out of range")
+
+    searchpos = 0
+    node = my_list["first"]
+
     while searchpos < pos:
-        node=node["next"]
-        searchpos +=1
+        if node is None or node["next"] is None:
+            raise IndexError("Invalid list structure: encountered None unexpectedly")
+        node = node["next"]
+        searchpos += 1
+
     return node["info"]
 
 def is_present(my_list, element, cmp_function):
@@ -163,23 +170,32 @@ def exchange(my_list,pos1,pos2):
         segundo["next"]=primero["next"]
     return my_list
     
-def sub_list(my_list,pos,num_elements):
-    conteo=0
-    conteo2=0
-    nueva_lista={"first":None,"last":None,"size":0}
-    if pos < 0 or pos > size(my_list):
+def sub_list(my_list, pos, num_elements):
+    conteo = 0
+    conteo2 = 0
+    
+    nueva_lista = new_list()
+
+    if pos < 0 or pos >= my_list["size"]:
         raise Exception('IndexError: list index out of range')
-    else:
-        actual=my_list["first"]
-        while conteo < pos-1:
-            conteo+=1
-            actual=actual["next"]
-        nueva_lista["first"]=actual
-        while conteo2 < num_elements:
-            conteo2+=1
-            actual=actual["next"]
-        actual["next"]=None
-    return my_list
+
+    actual = my_list["first"]
+    while conteo < pos:
+        conteo += 1
+        actual = actual["next"]
+
+    nueva_lista["first"] = actual
+    
+    while conteo2 < num_elements and actual is not None:
+        conteo2 += 1
+        actual = actual["next"]
+        if conteo2 < num_elements and actual is not None:
+            add_last(nueva_lista, actual)
+
+    if actual is not None:
+        actual["next"] = None
+    
+    return nueva_lista
 
 def default_sort_criteria(element_1, element_2):
 
@@ -198,7 +214,7 @@ def selection_sort (my_list,sort_crit):
     elif my_list["size"]==1:
         return my_list
     
-    if sort_crit== True:
+    if sort_crit == True:
         while current is not None:
             minimo=current
             sig=current["next"]
@@ -294,3 +310,81 @@ def shell_sort(my_list, sort_crit):
         h //= 3
     return my_list
 
+def merge(left, right, sort_crit):
+    result = new_list()
+    
+    while not is_empty(left) and not is_empty(right):
+        if (sort_crit and left["first"]["info"] <= right["first"]["info"]) or (not sort_crit and left["first"]["info"] >= right["first"]["info"]):
+            add_last(result, remove_first(left))
+        else:
+            add_last(result, remove_first(right))
+    
+    while not is_empty(left):
+        add_last(result, remove_first(left))
+    while not is_empty(right):
+        add_last(result, remove_first(right))
+    
+    return result
+
+def merge_sort(my_list, sort_crit):
+    if size(my_list) <= 1:
+        return my_list
+    
+    mid = size(my_list) // 2
+    left = sub_list(my_list, 0, mid)
+    right = sub_list(my_list, mid, size(my_list) - mid)
+    
+    left = merge_sort(left, sort_crit)
+    right = merge_sort(right, sort_crit)
+    
+    return merge(left, right, sort_crit)
+
+
+def partition(my_list, sort_crit, low, high):
+    """
+    Reordena los elementos de la lista alrededor de un pivote y devuelve su posición final.
+    """
+    pivot_node = my_list["first"]
+    for _ in range(high):
+        if pivot_node["next"] is None:
+            raise IndexError("High index out of bounds")
+        pivot_node = pivot_node["next"]
+    
+    pivot_value = pivot_node["info"]
+    i = low - 1
+    current = my_list["first"]
+    
+    for j in range(low, high):
+        j_node = my_list["first"]
+        for _ in range(j):
+            j_node = j_node["next"]
+
+        if (sort_crit and j_node["info"] <= pivot_value) or (not sort_crit and j_node["info"] >= pivot_value):
+            i += 1
+            i_node = my_list["first"]
+            for _ in range(i):
+                i_node = i_node["next"]
+            i_node["info"], j_node["info"] = j_node["info"], i_node["info"]
+    
+    i += 1
+    i_node = my_list["first"]
+    for _ in range(i):
+        i_node = i_node["next"]
+    i_node["info"], pivot_node["info"] = pivot_node["info"], i_node["info"]
+    
+    return i
+
+def quick_sort(my_list, sort_crit=True, low=0, high=None):
+    """
+    Implementa Quick Sort para ordenar una lista enlazada simple.
+    """
+    if high is None:
+        high = size(my_list) - 1
+
+    if low < high:
+        pi = partition(my_list, sort_crit, low, high)
+
+        quick_sort(my_list, sort_crit, low, pi - 1)
+        quick_sort(my_list, sort_crit, pi + 1, high)
+
+    return my_list

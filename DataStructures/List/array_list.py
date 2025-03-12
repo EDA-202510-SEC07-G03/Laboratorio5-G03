@@ -194,53 +194,45 @@ def shell_sort(my_list, sort_criteria):
    
 def quick_sort(my_list, sort_criteria, low=0, high=None):
     if high is None:
-        high = size(my_list)
-    if sort_criteria == True:
-        def partition(my_list, low, high):
-            pivot = my_list[high]
-            k = low
+        high = size(my_list) - 1
+    def partition(my_list, low, high):
+        pivot = my_list["elements"][high]
+        k = low
+        if sort_criteria == True:
             for i in range(low, high):
-                if my_list[i] < pivot:
-                    exchange(my_list, my_list[k], my_list[i])
+                if my_list["elements"][i] < pivot:
+                    exchange(my_list, k, i)
                     k += 1
-            exchange(my_list, my_list[k], my_list[high])
+            exchange(my_list, k, high)
             return k
-    else:
-        def partition(my_list, low, high):
-            pivot = my_list[high]
-            k = low
+        else:
             for i in range(low, high):
                 if my_list[i] > pivot:
                     exchange(my_list, my_list[k], my_list[i])
                     k += 1
             exchange(my_list, my_list[k], my_list[high])
-            return k     
-    
-    if low < high:
-        pindex = partition(my_list, low, high)
-        quick_sort(my_list, low, pindex - 1)
-        quick_sort(my_list, pindex + 1, high) 
-    return my_list
+            return k
+
 
 def merge(left, right, sort_criteria):
     sorted_list = new_list()
     i = j = 0
     if sort_criteria == True:
         while i < size(left) and j < size(right):
-            if left[i] <= right[j]:
-                add_last(sorted_list, left[i])
+            if left["elements"][i] <= right["elements"][j]:
+                add_last(sorted_list, left["elements"][i])
                 i += 1
             else:
-                add_last(sorted_list, right[j])
+                add_last(sorted_list, right["elements"][j])
                 j += 1
         return sorted_list
     else:
         while i < size(left) and j < size(right):
-            if left[i] >= right[j]:
-                add_last(sorted_list, left[i])
+            if left["elements"][i] >= right["elements"][j]:
+                add_last(sorted_list, left["elements"][i])
                 i += 1
             else:
-                add_last(sorted_list, right[j])
+                add_last(sorted_list, right["elements"][j])
                 j += 1
         return sorted_list       
 
@@ -248,9 +240,9 @@ def merge_sort(my_list, sort_criteria):
     if size(my_list) <= 1:
         return my_list
     mid = size(my_list) // 2
-    l_half = merge_sort(sub_list(my_list, 0, mid))
-    r_half = merge_sort(sub_list(my_list, mid, mid))
-    return merge(l_half, r_half, sort_criteria)
+    l_half = merge_sort(sub_list(my_list, 0, mid), sort_criteria)
+    r_half = merge_sort(sub_list(my_list, mid, size(my_list) - mid), sort_criteria)
+    return merge(l_half, r_half,sort_criteria)
     
          
     
