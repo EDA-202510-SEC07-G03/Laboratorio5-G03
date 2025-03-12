@@ -187,22 +187,22 @@ def select_sort_algorithm(algo_opt):
 
     # opcion 2: Insertion Sort
     # TODO: completar la opcion de Insertion Sort
-    if algo_opt == 2:
+    elif algo_opt == 2:
         sort_algorithm = 2
         algo_msg = "Seleccionó la configuración - Insertion Sort"
     # opcion 3: Shell Sort
     # TODO: completar la opcion de Shell Sort
-    if algo_opt == 3:
+    elif algo_opt == 3:
         sort_algorithm = 3
         algo_msg = "Seleccionó la configuración - Shell Sort"
     # opcion 4: Merge Sort
     # TODO: completar la opcion de Merge Sort
-    if algo_opt == 4:
+    elif algo_opt == 4:
         sort_algorithm = 4
         algo_msg = "Seleccionó la configuración - Merge Sort"
     # opcion 5: Quick Sort
     # TODO: completar la opcion de Quick Sort
-    if algo_opt == 5:
+    elif algo_opt == 5:
         sort_algorithm = 5
         algo_msg = "Seleccionó la configuración - Quick Sort"
     
@@ -353,24 +353,78 @@ def sort_books(catalog):
     # TODO: completar las opciones para selection_sort, insertion_sort, shell_sort, merge_sort y quick_sort
 
     if sort_algorithm == 1:
-        sorted_books_s = data_structure.selection_sort(sorted_books, eval_ratings)  # TODO: completar la llamada a selection_sort
         
-
+        if data_structure == al:
+            nova=data_structure.new_list()
+            sorted_books_s=data_structure.new_list()
+            for i in range (sorted_books["size"]):
+                data_structure.add_last(nova,sorted_books["elements"][i]["average_rating"])
+            data_structure.selection_sort(nova,True)
+            for x in range(nova["size"]):
+                for j in range(sorted_books["size"]):
+                    if nova["elements"][x] == sorted_books["elements"][j]["average_rating"]:
+                        data_structure.add_last(sorted_books_s,sorted_books["elements"][j])
+        else:
+            return None   
     elif sort_algorithm == 2:
         # TODO: completar la llamada a insertion_sort
-        sorted_books_s = data_structure.insertion_sort(sorted_books,eval_ratings)
+        if data_structure == al:
+            nova=data_structure.new_list()
+            sorted_books_s=data_structure.new_list()
+            for i in range (sorted_books["size"]):
+                data_structure.add_last(nova,sorted_books["elements"][i]["average_rating"])
+            data_structure.insertion_sort(nova,True)
+            for x in range(nova["size"]):
+                for j in range(sorted_books["size"]):
+                    if nova["elements"][x] == sorted_books["elements"][j]["average_rating"]:
+                        data_structure.add_last(sorted_books_s,sorted_books["elements"][j])
+        else:
+            return None   
 
     elif sort_algorithm == 3:
         # TODO: completar la llamada a shell_sort
-        sorted_books_s = data_structure.shell_sort(sorted_books,eval_ratings)
+        if data_structure == al:
+            nova=data_structure.new_list()
+            sorted_books_s=data_structure.new_list()
+            for i in range (sorted_books["size"]):
+                data_structure.add_last(nova,sorted_books["elements"][i]["average_rating"])
+            data_structure.shell_sort(nova,True)
+            for x in range(nova["size"]):
+                for j in range(sorted_books["size"]):
+                    if nova["elements"][x] == sorted_books["elements"][j]["average_rating"]:
+                        data_structure.add_last(sorted_books_s,sorted_books["elements"][j])
+        else:
+            return None   
 
     elif sort_algorithm == 4:
         # TODO: completar la llamada a merge_sort
-        sorted_books_s = data_structure.merge_sort(sorted_books,eval_ratings)
+        if data_structure == al:
+            nova=data_structure.new_list()
+            sorted_books_s=data_structure.new_list()
+            for i in range (sorted_books["size"]):
+                data_structure.add_last(nova,sorted_books["elements"][i]["average_rating"])
+            data_structure.merge_sort(nova,True)
+            for x in range(nova["size"]):
+                for j in range(sorted_books["size"]):
+                    if nova["elements"][x] == sorted_books["elements"][j]["average_rating"]:
+                        data_structure.add_last(sorted_books_s,sorted_books["elements"][j])
+        else:
+            return None   
 
     elif sort_algorithm == 5:
         # TODO: completar la llamada a quick_sort
-        sorted_books_s = data_structure.quick_sort(sorted_books,eval_ratings)
+        if data_structure == al:
+            nova=data_structure.new_list()
+            sorted_books_s=data_structure.new_list()
+            for i in range (sorted_books["size"]):
+                data_structure.add_last(nova,sorted_books["elements"][i]["average_rating"])
+            data_structure.quick_sort(nova,True)
+            for x in range(nova["size"]):
+                for j in range(sorted_books["size"]):
+                    if nova["elements"][x] == sorted_books["elements"][j]["average_rating"]:
+                        data_structure.add_last(sorted_books_s,sorted_books["elements"][j])
+        else:
+            return None   
 
     end_time = get_time()
     delta = delta_time(start_time, end_time)
