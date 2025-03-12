@@ -365,7 +365,23 @@ def sort_books(catalog):
                     if nova["elements"][x] == sorted_books["elements"][j]["average_rating"]:
                         data_structure.add_last(sorted_books_s,sorted_books["elements"][j])
         else:
-            return None   
+            nova=data_structure.new_list()
+            current=sorted_books["first"]
+            sorted_books_s=data_structure.new_list()
+            for i in range (sorted_books["size"]):
+                data_structure.add_last(nova,current["info"]["info"]["average_rating"])
+                current=current["next"]
+            data_structure.selection_sort(nova,True)
+            
+            current_rating=nova["first"]
+            while current_rating is not None:
+                current_book=sorted_books["first"]
+                while current_book is not None:
+                    if current_rating["info"]==current_book["info"]["info"]["average_rating"]:
+                        data_structure.add_last(sorted_books_s,current_book)
+                    current_book=current_book["next"]
+                current_rating=current_rating["next"]
+            
     elif sort_algorithm == 2:
         # TODO: completar la llamada a insertion_sort
         if data_structure == al:
@@ -379,7 +395,22 @@ def sort_books(catalog):
                     if nova["elements"][x] == sorted_books["elements"][j]["average_rating"]:
                         data_structure.add_last(sorted_books_s,sorted_books["elements"][j])
         else:
-            return None   
+            nova=data_structure.new_list()
+            current=sorted_books["first"]
+            sorted_books_s=data_structure.new_list()
+            for i in range (sorted_books["size"]):
+                data_structure.add_last(nova,current["info"]["info"]["average_rating"])
+                current=current["next"]
+            data_structure.insertion_sort(nova,True)
+            
+            current_rating=nova["first"]
+            while current_rating is not None:
+                current_book=sorted_books["first"]
+                while current_book is not None:
+                    if current_rating["info"]==current_book["info"]["info"]["average_rating"]:
+                        data_structure.add_last(sorted_books_s,current_book)
+                    current_book=current_book["next"]
+                current_rating=current_rating["next"]
 
     elif sort_algorithm == 3:
         # TODO: completar la llamada a shell_sort
@@ -394,7 +425,22 @@ def sort_books(catalog):
                     if nova["elements"][x] == sorted_books["elements"][j]["average_rating"]:
                         data_structure.add_last(sorted_books_s,sorted_books["elements"][j])
         else:
-            return None   
+            nova=data_structure.new_list()
+            current=sorted_books["first"]
+            sorted_books_s=data_structure.new_list()
+            for i in range (sorted_books["size"]):
+                data_structure.add_last(nova,current["info"]["info"]["average_rating"])
+                current=current["next"]
+            data_structure.shell_sort(nova,True)
+            
+            current_rating=nova["first"]
+            while current_rating is not None:
+                current_book=sorted_books["first"]
+                while current_book is not None:
+                    if current_rating["info"]==current_book["info"]["info"]["average_rating"]:
+                        data_structure.add_last(sorted_books_s,current_book)
+                    current_book=current_book["next"]
+                current_rating=current_rating["next"]
 
     elif sort_algorithm == 4:
         # TODO: completar la llamada a merge_sort
@@ -409,7 +455,22 @@ def sort_books(catalog):
                     if nova["elements"][x] == sorted_books["elements"][j]["average_rating"]:
                         data_structure.add_last(sorted_books_s,sorted_books["elements"][j])
         else:
-            return None   
+            nova=data_structure.new_list()
+            current=sorted_books["first"]
+            sorted_books_s=data_structure.new_list()
+            for i in range (sorted_books["size"]):
+                data_structure.add_last(nova,current["info"]["info"]["average_rating"])
+                current=current["next"]
+            data_structure.merge_sort(nova,True)
+            
+            current_rating=nova["first"]
+            while current_rating is not None:
+                current_book=sorted_books["first"]
+                while current_book is not None:
+                    if current_rating["info"]==current_book["info"]["info"]["average_rating"]:
+                        data_structure.add_last(sorted_books_s,current_book)
+                    current_book=current_book["next"]
+                current_rating=current_rating["next"]
 
     elif sort_algorithm == 5:
         # TODO: completar la llamada a quick_sort
@@ -424,7 +485,22 @@ def sort_books(catalog):
                     if nova["elements"][x] == sorted_books["elements"][j]["average_rating"]:
                         data_structure.add_last(sorted_books_s,sorted_books["elements"][j])
         else:
-            return None   
+            nova=data_structure.new_list()
+            current=sorted_books["first"]
+            sorted_books_s=data_structure.new_list()
+            for i in range (sorted_books["size"]):
+                data_structure.add_last(nova,current["info"]["info"]["average_rating"])
+                current=current["next"]
+            data_structure.quick_sort(nova,True)
+            
+            current_rating=nova["first"]
+            while current_rating is not None:
+                current_book=sorted_books["first"]
+                while current_book is not None:
+                    if current_rating["info"]==current_book["info"]["info"]["average_rating"]:
+                        data_structure.add_last(sorted_books_s,current_book)
+                    current_book=current_book["next"]
+                current_rating=current_rating["next"]  
 
     end_time = get_time()
     delta = delta_time(start_time, end_time)
